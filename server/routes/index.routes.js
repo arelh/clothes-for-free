@@ -11,6 +11,7 @@ indexRouter.get("/users/:id",cors(),findUserById)
 indexRouter.post("/users/add",cors(),addUser)
 indexRouter.delete("/users/delete/:id",cors(),deleteUser)
 indexRouter.patch("/users/update/:id",cors(),updateUser)
+// indexRouter.patch("/users/login",cors(),loginUser)
 
 //------------------------------------------------------------------
 indexRouter.get("/products",cors(),getProduct)

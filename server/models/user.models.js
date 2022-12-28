@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    unique:true,
     lowercase: true,
     validate(value) {
       if (!validator.isEmail(value)) {
@@ -35,18 +36,33 @@ const userSchema = new mongoose.Schema({
   phoneNumber: { type: Number },
 });
 
-const ShopUsers = mongoose.model("ShopUsers", userSchema);
 
-export { ShopUsers };
+userSchema.static.findByCredentials=async (email,password)=>{
+   const user = await ShopUsers.findOne({ email })
+
+    if (!user) {
+        throw new Error('Unable to login')
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password)
+
+    if (!isMatch) {
+        throw new Error('Unable to login')
+    }
+
+    return user
+}
+
+
 
 userSchema.pre("save", async function (next) {
   const user = this;
-
   if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 8);
   }
-
+  
   next();
 });
 
-export const User = mongoose.model("User", userSchema);
+const ShopUsers = mongoose.model("ShopUsers", userSchema);
+export { ShopUsers };

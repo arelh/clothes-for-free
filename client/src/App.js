@@ -6,6 +6,7 @@ import Homepage from "./components/pages/Homepage";
 import AllProduct from './components/pages/AllProduct';
 import Login from './components/Login';
 import Register from './components/Register';
+import ProductUser from './components/pages/ProductUser';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/AllProduct" element={<AllProduct/>} />
         <Route path="/Login" element={<Login/>} />
         <Route path="/Register" element={<Register/>} />
+        <Route path="/ProductUser" element={<ProductUser/>} />
         <Route path="*" element={<Error />} />
       </Routes>
      
