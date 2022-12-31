@@ -7,6 +7,7 @@ import AllProduct from './components/pages/AllProduct';
 import Login from './components/Login';
 import Register from './components/Register';
 import ProductUser from './components/pages/ProductUser';
+import EnterNewProduct from "./components/EnterNewProduct"
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/Login" element={<Login/>} />
         <Route path="/Register" element={<Register/>} />
         <Route path="/ProductUser" element={<ProductUser/>} />
+        <Route path="/EnterNewProduct" element={<EnterNewProduct/>} />
         <Route path="*" element={<Error />} />
       </Routes>
      

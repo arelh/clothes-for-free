@@ -5,7 +5,7 @@ function Nav() {
   return (
     <div className="Nav">
     <div className="right_nav">
-      <Link to="/Register" className="link">הירשם</Link>
+      {/* <Link to="/Register" className="link">הירשם</Link> */}
       <Link to="/Login" className="link">התחבר</Link>
       </div>
       <Link to="/ProductUser" className="link">ProductUser</Link>

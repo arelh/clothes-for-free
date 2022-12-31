@@ -1,4 +1,5 @@
 import { ShopProducts } from "../models/product.models.js";
+
 export const getProduct =async (req,res)=>{
     try{
         const products=await ShopProducts.find({});
@@ -6,7 +7,6 @@ export const getProduct =async (req,res)=>{
     }
     catch{}
 }
-
 
 export const addProduct = async (req, res) => {
     try {

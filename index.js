@@ -1,6 +1,6 @@
 import {app} from "./server/app.js"
 import "./server/db/mongoose.js"
-import bcrypt from "bcryptjs"
+// import bcrypt from "bcryptjs"
 
 const PORT=process.env.PORT||5002
 

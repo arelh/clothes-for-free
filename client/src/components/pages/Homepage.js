@@ -8,7 +8,7 @@ import img4 from "../images/img4.jpg"
 
 function Homepage() {
   return (
-    <div>
+    <div className="home_page">
       <div className="containerHP">
         <div className="description description1">
           <img className="img" src={img1} alt="img1"></img>

@@ -6,7 +6,6 @@ import bcrypt from "bcryptjs"
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
     trim: true,
   },
   email: {
@@ -15,11 +14,13 @@ const userSchema = new mongoose.Schema({
     trim: true,
     unique:true,
     lowercase: true,
+    match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     validate(value) {
       if (!validator.isEmail(value)) {
         throw new Error("Email is invalid");
       }
     },
+
   },
   password: {
     type: String,
@@ -32,9 +33,12 @@ const userSchema = new mongoose.Schema({
       }
     },
   },
-  address: { type: String, required: true, trim: true, lowercase: true },
+  address: { type: String, trim: true, lowercase: true },
   phoneNumber: { type: Number },
+  products:{type: Array}
 });
+
+
 
 
 userSchema.static.findByCredentials=async (email,password)=>{
@@ -55,14 +59,14 @@ userSchema.static.findByCredentials=async (email,password)=>{
 
 
 
-userSchema.pre("save", async function (next) {
-  const user = this;
-  if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, 8);
-  }
+// userSchema.pre("save", async function (next) {
+//   const user = this;
+//   if (user.isModified("password")) {
+//     user.password = await bcrypt.hash(user.password, 8);
+//   }
   
-  next();
-});
+//   next();
+// });
 
 const ShopUsers = mongoose.model("ShopUsers", userSchema);
 export { ShopUsers };
