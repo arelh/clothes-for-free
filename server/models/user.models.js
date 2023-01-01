@@ -36,6 +36,8 @@ const userSchema = new mongoose.Schema({
   address: { type: String, trim: true, lowercase: true },
   phoneNumber: { type: Number },
   products:{type: Array}
+  
+  //mongoose.Types.objectId
 });
 
 

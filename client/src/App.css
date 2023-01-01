@@ -109,27 +109,12 @@ a {
   border-radius: 20px;
   background: #f5f5f5;
 }
-.containerUser {
-  height: 100vh;
-  width: 100%;
-  background-color: antiquewhite;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.cardUser {
-  width: 150px;
-  height: 350px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  border: black solid 4px;
-  justify-content: space-around;
-  align-items: center;
-  margin: 15px;
+.owners{
+color:chartreuse ;
+  background-color: black;
   border-radius: 20px;
-  background: #f5f5f5;
+  padding: 7px;
+
 }
 /* ------------------------productUser----------------------------- */
 .ProductUser{
@@ -163,7 +148,6 @@ color: wheat;
   width: 500px;
   height: 500px;
   display: flex;
-  justify-content: space-between;
   align-items:center;
   flex-direction: column;
 
@@ -173,7 +157,6 @@ margin-left: 5px;
 margin-top: 10px;
 display: flex;
 flex-direction: column;
-justify-content:center;
 align-items: center;
 
 }

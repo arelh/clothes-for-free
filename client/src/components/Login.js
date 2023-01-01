@@ -1,16 +1,15 @@
 import React from "react";
 
 function Login() {
-//   const [login, setLogin] = useState({
-//     username: "",
-//     password: "",
-//  });
-//  const [validEmail, setValidEmail] = useState(null)
+  //   const [login, setLogin] = useState({
+  //     username: "",
+  //     password: "",
+  //  });
+  //  const [validEmail, setValidEmail] = useState(null)
 
-const checkLogin=async(e)=>{
-  e.preventDefault()
-}
-
+  const checkLogin = async (e) => {
+    e.preventDefault();
+  };
 
   return (
     <section className="vh-100" style={{ backgroundColor: "#252525" }}>
@@ -34,13 +33,12 @@ const checkLogin=async(e)=>{
                     Email
                   </label>
                 </div>
-
                 <div className="form-outline mb-4">
                   <input
                     type="password"
-
                     id="typePasswordX-2"
                     className="form-control form-control-lg"
+                    
                   />
                   <label className="form-label" htmlFor="typePasswordX-2">
                     Password
@@ -48,7 +46,7 @@ const checkLogin=async(e)=>{
                 </div>
                 <div>
                   <button
-                  onClick={checkLogin}
+                    onClick={checkLogin}
                     className="btn btn-primary btn-lg btn-block m-1"
                     type="submit"
                   >
