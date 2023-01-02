@@ -14,7 +14,6 @@ function AllProduct() {
           "http://localhost:5002/clothesForFree/products"
         );
         setInfoProduct(data);
-        console.log(data);
         setIsLoading(false);
       } catch (e) {
         console.log(e);
@@ -24,13 +23,17 @@ function AllProduct() {
     fetchDataProduct();
   }, []);
 
+  console.log(infoProduct);
+
 
   return (
     <div>
+      
       <div className="containerProduct">
         {isLoading && <Spinner />}
         {infoProduct.map((user) => {
           return (
+            
             <div className="cardProduct" key={user._id}>
               <p>סוג הבגד: {user.kind}</p>
               <p>מידה: {user.size}</p>
@@ -38,9 +41,9 @@ function AllProduct() {
               <p>עונה: {user.season}</p>
               <p>מין הלובש:{user.gender_wear}</p>
               <div className="owners">
-              {/* <p>בעלים:{user.user.name}</p>
+              <p>בעלים:{user.user.name}</p>
               <p>טלפון:{user.user.phoneNumber}</p>
-              <p>כתובת:{user.user.address}</p> */}
+              <p>כתובת:{user.user.address}</p>
               </div>
             </div>
           );

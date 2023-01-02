@@ -42,6 +42,25 @@ export const findProductById = async (req, res) => {
     res.status(500).send();
   }
 };
+export const findProductByUserId = async (req, res) => {
+  const userId = req.params.id;
+  console.log(userId);
+
+  try {
+    const product = await ShopProducts.find({userId:userId});
+
+    if (!product) {
+      return res.status(404).send();
+    }
+
+    res.send(product);
+  } catch (e) {
+    res.status(500).send();
+  }
+};
+
+
+
 export const deleteProduct = async (req, res) => {
   try {
     const product = await ShopProducts.findByIdAndDelete(req.params.id);
@@ -88,3 +107,4 @@ export const updateProduct = async (req, res) => {
     res.status(400).send(e);
   }
 };
+

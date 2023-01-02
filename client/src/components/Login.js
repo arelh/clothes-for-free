@@ -1,15 +1,38 @@
-import React from "react";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import validator from "validator";
+import { Api } from "./Api";
+
+
 
 function Login() {
-  //   const [login, setLogin] = useState({
-  //     username: "",
-  //     password: "",
-  //  });
-  //  const [validEmail, setValidEmail] = useState(null)
+  
+  const navigate=useNavigate
+  const [login, setLogin] = useState({username: "",password: "",});
+  // const [validEmail, setValidEmail] = useState(null)
 
   const checkLogin = async (e) => {
     e.preventDefault();
+    try{
+      if(!validator.isEmail(login.username))
+      throw new Error("Please Insert Valid Email");
+      await Api.post("/login", login);
+      localStorage.setItem("userValues", login.username);
+      setLogin({
+        username: "",
+        password: "",
+     });
+     navigate("/");
+  } catch (err) {
+     localStorage.removeItem("userValues");
+    //  setValidEmail(err.message)
+
+    }
   };
+
+
+
+
 
   return (
     <section className="vh-100" style={{ backgroundColor: "#252525" }}>
