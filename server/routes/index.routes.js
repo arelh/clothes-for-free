@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { getUser,addUser, findUserById, deleteUser, updateUser, login, signup } from "../controllers/Users.controllers.js";
 import { getProduct,addProduct, findProductById, deleteProduct, updateProduct, findProductByUserId } from "../controllers/product.controllers.js";
-// import { checkAuth } from "../middlewares/checkAuth .js";
-
+import { checkAuth } from "../middlewares/checkAuth .js";
+// 
 import cors from "cors"
 
 export const indexRouter=Router()
+
+//-----------------------users-------------------------------------------
 
 indexRouter.get("/users",cors(),getUser)
 indexRouter.get("/users/:id",cors(),findUserById)
@@ -15,7 +17,7 @@ indexRouter.patch("/users/update/:id",cors(),updateUser)
 indexRouter.post('/login', login);
 indexRouter.post('/signup', signup);
 
-//------------------------------------------------------------------
+//-----------------------products-------------------------------------------
 indexRouter.get("/products",cors(),getProduct)
 indexRouter.get("/products/:id",cors(),findProductById)
 indexRouter.get("/products/user/:id",cors(),findProductByUserId)

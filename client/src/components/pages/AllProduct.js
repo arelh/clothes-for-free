@@ -14,6 +14,7 @@ function AllProduct() {
           "http://localhost:5002/clothesForFree/products"
         );
         setInfoProduct(data);
+        console.log(data);
         setIsLoading(false);
       } catch (e) {
         console.log(e);
@@ -23,7 +24,7 @@ function AllProduct() {
     fetchDataProduct();
   }, []);
 
-  console.log(infoProduct);
+   console.log(infoProduct);
 
 
   return (

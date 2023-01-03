@@ -1,12 +1,11 @@
 import { ShopUsers } from "../models/user.models.js";
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs"
-import  jwt  from "jsonwebtoken";
-
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 export const getUser = async (req, res) => {
+  const users = await ShopUsers.find({});
   try {
-    const users = await ShopUsers.find({});
     res.status(200).send(users);
   } catch (err) {
     res.send(err.message);
@@ -17,7 +16,8 @@ export const addUser = async (req, res) => {
   const user = new ShopUsers(req.body);
   try {
     await user.save();
-    res.status(201).send(user);
+    const token = await user.generateAuthToken();
+    res.status(201).send(user, token);
   } catch (e) {
     res.status(400).send(e);
   }
@@ -89,7 +89,8 @@ export const login = (req, res) => {
   const { email, password } = req.body;
 
   ShopUsers.find({ email }).then((users) => {
-    if (users.length === 0) {  //If there is no user
+    if (users.length === 0) {
+      //If there is no user
       return res.status(401).json({
         message: "Auth failed",
       });
@@ -119,6 +120,7 @@ export const login = (req, res) => {
         return res.status(200).json({
           message: "Auth successful",
           token,
+          id: user._id,
         });
       }
 
@@ -129,40 +131,43 @@ export const login = (req, res) => {
   });
 };
 
-export const signup= (req, res) => {
+export const signup = (req, res) => {
   const { email, password } = req.body;
 
   ShopUsers.find({ email }).then((users) => {
-      if (users.length >= 1) {
-          return res.status(409).json({
-              message: 'Email exists'
-          })
+    if (users.length >= 1) {
+      return res.status(409).json({
+        message: "Email exists",
+      });
+    }
+
+    bcrypt.hash(password, 10, (error, hash) => {
+      if (error) {
+        return res.status(500).json({
+          error,
+        });
       }
 
-      bcrypt.hash(password, 10, (error, hash) => {
-          if (error) {
-              return res.status(500).json({
-                  error
-              })
-          }
-
-          const user = new ShopUsers({
-              _id: new mongoose.Types.ObjectId(),
-              email,
-              password: hash//save the hash into dataBase
-          })
-
-          user.save().then((result) => {
-              console.log(result);
-
-              res.status(200).json({
-                  message: 'User created'
-              });
-          }).catch(error => {
-              res.status(500).json({
-                  error
-              })
-          });
+      const user = new ShopUsers({
+        _id: new mongoose.Types.ObjectId(),
+        email,
+        password: hash, //save the hash into dataBase
       });
-  })
-}
+
+      user
+        .save()
+        .then((result) => {
+          console.log(result);
+          res.status(200).json({
+            message: "User created",
+            result,
+          });
+        })
+        .catch((error) => {
+          res.status(500).json({
+            error,
+          });
+        });
+    });
+  });
+};

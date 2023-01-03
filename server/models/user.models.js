@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs"
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
+    // required: true,
     trim: true,
   },
   email: {
@@ -35,10 +36,20 @@ const userSchema = new mongoose.Schema({
   },
   address: { type: String, trim: true, lowercase: true },
   phoneNumber: { type: Number },
-  products:{type: Array}
+  products:{type: Array},
+  // tokens:[{
+  //   token:{
+  //     type:String,required: true
+  //   }
+  // }]
   
-  //mongoose.Types.objectId
 });
+
+// userSchema.virtual("products",{
+//   ref:"Product",
+//   localField:__dirname,
+//   foreignField:"owner"
+// })
 
 
 

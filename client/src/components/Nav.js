@@ -12,7 +12,6 @@ function Nav() {
       <div className="logo_nav">
         <img className="logo" src={logo} alt="logo"></img>
       </div>
-      <Link to="/ProductUser" className="link">userProducts</Link>
       <div className="left_nav">
       <Link to="/" className="link">עמוד הבית</Link>
       <Link to="/AllProduct" className="link">כל המוצרים</Link>

@@ -10,7 +10,8 @@ const productSchema = new mongoose.Schema({
     season: { type: String,require:true },
     gender_wear: { type: String },
     image: { type: String },
-    userId:{type:String}
+    userId:{type:String},
+    // owner: {type: mongoose.Schema.Types.ObjectId,required: true,ref: 'User'}
     
   });
   
