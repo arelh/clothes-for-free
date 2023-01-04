@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getUser,addUser, findUserById, deleteUser, updateUser, login, signup } from "../controllers/Users.controllers.js";
+import { getUser,addUser, findUserById, deleteUser, updateUser, login, signup, logout } from "../controllers/Users.controllers.js";
 import { getProduct,addProduct, findProductById, deleteProduct, updateProduct, findProductByUserId } from "../controllers/product.controllers.js";
-import { checkAuth } from "../middlewares/checkAuth .js";
+// import { checkAuth } from "../middlewares/checkAuth .js";
 // 
 import cors from "cors"
 
@@ -16,6 +16,7 @@ indexRouter.delete("/users/delete/:id",cors(),deleteUser)
 indexRouter.patch("/users/update/:id",cors(),updateUser)
 indexRouter.post('/login', login);
 indexRouter.post('/signup', signup);
+indexRouter.post('/logout', logout);
 
 //-----------------------products-------------------------------------------
 indexRouter.get("/products",cors(),getProduct)

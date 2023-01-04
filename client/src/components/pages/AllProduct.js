@@ -32,7 +32,7 @@ function AllProduct() {
       
       <div className="containerProduct">
         {isLoading && <Spinner />}
-        {infoProduct.map((user) => {
+        {infoProduct&&infoProduct.map((user) => {
           return (
             
             <div className="cardProduct" key={user._id}>

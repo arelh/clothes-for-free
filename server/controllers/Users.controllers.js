@@ -132,7 +132,7 @@ export const login = (req, res) => {
 };
 
 export const signup = (req, res) => {
-  const { email, password } = req.body;
+  const { email, password,name,phoneNumber,address } = req.body;
 
   ShopUsers.find({ email }).then((users) => {
     if (users.length >= 1) {
@@ -152,6 +152,9 @@ export const signup = (req, res) => {
         _id: new mongoose.Types.ObjectId(),
         email,
         password: hash, //save the hash into dataBase
+        name,
+        phoneNumber,
+        address
       });
 
       user
@@ -171,3 +174,16 @@ export const signup = (req, res) => {
     });
   });
 };
+
+export const logout= async (req, res) => {
+  try {
+      req.user.tokens = req.user.tokens.filter((token) => {
+          return token.token !== req.token
+      })
+      await req.user.save()
+
+      res.send()
+  } catch (e) {
+      res.status(500).send()
+  }
+}

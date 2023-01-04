@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 
-function EnterNewProduct() {
+function EnterNewProduct(props) {
 
 
   const [KindVal, setKindVal] = useState("");
@@ -10,6 +10,8 @@ function EnterNewProduct() {
   const [ColorVal, setColorVal] = useState("");
   const [SeasonVal, setSeasonVal] = useState("");
   const [GenderWearVal, setGenderWearVal] = useState("");
+  // const [massage,setMassage]=useState()
+  // const [idVal, setidVal] = useState("");
   // const [Massage, setMassage] = useState(false);
   
 
@@ -31,15 +33,18 @@ const handleInputGenderWear= ({target:{value}})=>{
   setGenderWearVal(value)
 }
 
-const handleAddProduct=()=>{
+
+const handleAddProduct=(id)=>{
   const {data}=axios.post("http://localhost:5002/clothesForFree/products/add",{
     "kind": KindVal,
     "size": SizeVal,
     "color":ColorVal,
     "season": SeasonVal, 
-    "gender_wear":GenderWearVal
+    "gender_wear":GenderWearVal,
+    "userId": props.id
   }
   )
+  console.log(props.id);
 console.log(data);}
 
 

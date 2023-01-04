@@ -1,15 +1,13 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import axios from "axios"
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // import validator from "validator";
 // import { Api } from "./Api";
 
-
-
 function Login() {
-  
-  const navigate=useNavigate()
-  const [login, setLogin] = useState({email: "",password: "",});
+  const navigate = useNavigate();
+  const [login, setLogin] = useState({ email: "", password: "" });
+  const [loggedIn,setLoggedIn] = useState(false)
   // const [isNewUser, setIsNewUser] = useState(true);
   // const [validEmail, setValidEmail] = useState(null)
 
@@ -32,22 +30,29 @@ function Login() {
   //   }
   // };
 
-  const RegisterUser = async ()=>{
-   const {data}= await axios.post("http://localhost:5002/clothesForFree/signup",login)
+  // const RegisterUser = async ()=>{
+  //  const {data}= await axios.post("http://localhost:5002/clothesForFree/signup",login)
+  //   console.log(data);
+  // }
+
+  const LoginUser = async () => {
+    const { data } = await axios.post(
+      "http://localhost:5002/clothesForFree/Login",
+      login
+    );
     console.log(data);
-  }
-  
-
-  const LoginUser = async ()=>{
-   const {data}= await axios.post("http://localhost:5002/clothesForFree/Login",login)
-    console.log(data);
-    navigate(`/ProductUser/${data.id}`)
-
-  }
-
-
-
-
+    localStorage.setItem("userLog", data.token);
+    setLoggedIn(true)
+    navigate(`/ProductUser/${data.id}`);
+  };
+  const pass = async () => {
+    navigate("/Register");
+  };
+  useEffect(()=>{
+    if(loggedIn){
+      localStorage.getItem("userLog")
+    }
+  },[loggedIn])
   return (
     <section className="vh-100" style={{ backgroundColor: "#252525" }}>
       <div className="container  h-100">
@@ -58,48 +63,53 @@ function Login() {
               style={{ borderRadius: "1rem" }}
             >
               <div className="card-body p-5 text-center">
-                <h3 className="mb-5">Sign up</h3>
+                <h3 className="mb-5">התחבר</h3>
 
                 <div className="form-outline mb-4">
                   <input
-                    onChange={(e)=>{setLogin((prev)=> {
-                      return {...prev,email:e.target.value}})}}
+                    onChange={(e) => {
+                      setLogin((prev) => {
+                        return { ...prev, email: e.target.value };
+                      });
+                    }}
                     type="email"
                     id="typeEmailX-2"
                     className="form-control form-control-lg"
                   />
                   <label className="form-label" htmlFor="typeEmailX-2">
-                    Email
+                    מייל
                   </label>
                 </div>
                 <div className="form-outline mb-4">
                   <input
-                  onChange={(e)=>{setLogin((prev)=> {
-                    return {...prev,password:e.target.value}})}}
+                    onChange={(e) => {
+                      setLogin((prev) => {
+                        return { ...prev, password: e.target.value };
+                      });
+                    }}
                     type="password"
                     id="typePasswordX-2"
                     className="form-control form-control-lg"
-                    
                   />
                   <label className="form-label" htmlFor="typePasswordX-2">
-                    Password
+                    סיסמא
                   </label>
                 </div>
                 <div>
                   <button
-                    onClick={RegisterUser}
+                    onClick={LoginUser}
                     className="btn btn-primary btn-lg btn-block m-1"
                     type="submit"
                   >
-                    Register
+                    היכנס
                   </button>
-                  <p>?already account</p>
+                  <p>אין לך חשבון עדיין?!</p>
                   <button
-                    onClick={LoginUser}
+                    onClick={pass}
                     className="btn btn-primary  btn-block m-1"
                     type="submit"
                   >
-                    Login
+                    הירשם
                   </button>
                 </div>
                 <label style={{ color: "brown" }}></label>

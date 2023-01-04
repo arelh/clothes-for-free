@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import Spinner from "../Spinner";
 import EnterNewProduct from "../EnterNewProduct";
 // import AllProduct from "./AllProduct";
@@ -11,6 +11,33 @@ function ProductUser() {
   const [infoProductById, setInfoProductById] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [popup, setPopup] = useState(false);
+  const [user,setUser]=useState(null)
+
+
+
+//!edit
+  const editProduct=()=>{
+    console.log();
+  }
+//!delete
+const deleteProduct = async (id) => {
+  try {
+    const { data } = await axios.delete(
+      `http://localhost:5002/clothesForFree/products/delete/${id}`
+    );
+    setInfoProductById((prevState) =>
+      prevState.filter((product) => {
+        return product.id !== data.id;
+      })
+    );
+  } catch (e) {
+    console.log(e.message);
+    
+  }
+};
+
+
+
 
   useEffect(() => {
     const fetchDataProduct = async () => {
@@ -27,57 +54,39 @@ function ProductUser() {
       }
     };
     fetchDataProduct();
+    setUser(JSON.parse(localStorage.getItem("user")))
   }, [id]);
-  console.log(infoProductById);
-
-  // const Navigate=useNavigate()
-  // const {id}=useParams()
-
-  // return (
-
-  //   <div className="ProductUser">
-  //       {isLoading && <Spinner />}
-  //       {infoProductById.map((user)=>{
-
-  //       })}
-  //       <button className="btn_addProduct"> <Link to="/EnterNewProduct" className="link">הוסף פריט</Link> </button>
-  //     <div className="containerProductUser">
-  //       <div className="titleProductUser">
-  //         <p>הבגדים של {id}</p>
-  //       </div>
-  //       <div className="cardProduct">
-
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-
+  
   return (
     <div className="ProductUser">
+
+      <div className="containerProductUser">
+        <div className="titleProductUser">
       <button className="btn_addProduct" onClick={ ()=> {
         setPopup(true)}}>
         {" "}
         הוסף פריט{" "}
       </button>
-
-      <div className="containerProductUser">
-        <div className="titleProductUser">
-          <p>הבגדים של {id}</p>
+          {user&&<p className="title" >הבגדים של {user.name}</p>}
         </div>
         {isLoading && <Spinner />}
         {infoProductById.map((user) => {
+          console.log(id);
           return (
-            <div className="cardProduct" key={user._id}>
+            <div className="cardProduct_user" key={user._id}>
               <p>סוג הבגד: {user.kind}</p>
               <p>מידה: {user.size}</p>
               <p>צבע: {user.color}</p>
               <p>עונה: {user.season}</p>
               <p>מין הלובש:{user.gender_wear}</p>
+              <button type="button" className="btn_edit" onClick={editProduct}>edit</button>
+              <button type="button" className="btn_edit" onClick={deleteProduct}>remove</button>
+              
             </div>
           );
         })}
       </div>
-      {popup ? <EnterNewProduct /> : ""}
+      {popup ? <EnterNewProduct id={id} />  : ""}
     </div>
   );
 }
