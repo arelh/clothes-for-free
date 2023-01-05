@@ -16,6 +16,9 @@ function Register() {
      localStorage.setItem("user", JSON.stringify(data.result))
 
    }
+   const pass = async () => {
+    navigate("/Login");
+  };
   //  console.log("user",user);
 
   return (
@@ -112,15 +115,15 @@ function Register() {
                     className="btn btn-primary btn-lg btn-block m-1"
                     type="submit"
                   >
-                    Register
+                    הירשם
                   </button>
-                  <p>?already account</p>
+                  <p>יש לך חשבון?</p>
                   <button
-                    onClick={RegisterUser}
+                    onClick={pass}
                     className="btn btn-primary  btn-block m-1"
                     type="submit"
                   >
-                    Login
+                    התחבר
                   </button>
                 </div>
                 <label style={{ color: "brown" }}></label>

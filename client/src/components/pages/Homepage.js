@@ -39,7 +39,7 @@ function Homepage() {
           <div className="text_img text_img3">
             <p className="title title3"> פנה מקום מהבית </p>
             <p className="desc_img desc_img3">
-              loremloremloremloremloremlorem{" "}
+               לכולנו שוכבים בארון טונות של בגדים במצב מצויין שאחרים ישמחו לקבל  {" "}
             </p>
           </div>
         </div>
@@ -49,7 +49,7 @@ function Homepage() {
           <div className="text_img text_img4">
             <p className="title title4">אתה תומך באחרים ברחבי המדינה</p>
             <p className="desc_img desc_img4">
-              loremloremloremloremloremlorem{" "}
+              יש לא מעט ילדים במדינה שישמחו לקבל בגד חדש{" "}
             </p>
           </div>
         </div>

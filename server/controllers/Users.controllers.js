@@ -132,7 +132,7 @@ export const login = (req, res) => {
 };
 
 export const signup = (req, res) => {
-  const { email, password,name,phoneNumber,address } = req.body;
+  const { email, password,name,phoneNumber,address,image } = req.body;
 
   ShopUsers.find({ email }).then((users) => {
     if (users.length >= 1) {
@@ -154,7 +154,8 @@ export const signup = (req, res) => {
         password: hash, //save the hash into dataBase
         name,
         phoneNumber,
-        address
+        address,
+        image
       });
 
       user

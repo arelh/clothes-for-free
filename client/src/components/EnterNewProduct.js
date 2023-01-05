@@ -10,6 +10,7 @@ function EnterNewProduct(props) {
   const [ColorVal, setColorVal] = useState("");
   const [SeasonVal, setSeasonVal] = useState("");
   const [GenderWearVal, setGenderWearVal] = useState("");
+  const [ImageVal, setImageVal] = useState("");
   // const [massage,setMassage]=useState()
   // const [idVal, setidVal] = useState("");
   // const [Massage, setMassage] = useState(false);
@@ -32,6 +33,9 @@ const handleInputSeason= ({target:{value}})=>{
 const handleInputGenderWear= ({target:{value}})=>{
   setGenderWearVal(value)
 }
+const handleInputImage= ({target:{value}})=>{
+  setImageVal(value)
+}
 
 
 const handleAddProduct=(id)=>{
@@ -41,11 +45,13 @@ const handleAddProduct=(id)=>{
     "color":ColorVal,
     "season": SeasonVal, 
     "gender_wear":GenderWearVal,
+    "image":ImageVal,
     "userId": props.id
   }
   )
+  props.setPopup(false)
+  console.log(data);}
   console.log(props.id);
-console.log(data);}
 
 
   return (
@@ -67,8 +73,12 @@ console.log(data);}
         <div className="newItem">
           <p className="peh">מין הלובש</p> <input className="inputEd" onChange={handleInputGenderWear}></input>
         </div>
-        <button> הוסף תמונה</button>
+        <div className="newItem">
+          <p className="peh">הוסף תמונה</p> <input className="inputEd" onChange={handleInputImage}></input>
+        </div>
         <button className="btn-Edit peh" onClick={handleAddProduct}>הוסף למאגר</button>
+        <button type="button" className="btn_edit" onClick={()=>{props.setPopup(false)}} >cancel</button>
+
       </div>
     </div>
   );

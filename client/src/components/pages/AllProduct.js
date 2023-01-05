@@ -36,11 +36,12 @@ function AllProduct() {
           return (
             
             <div className="cardProduct" key={user._id}>
-              <p>סוג הבגד: {user.kind}</p>
+              <p className="kind">סוג הבגד: {user.kind}</p>
               <p>מידה: {user.size}</p>
               <p>צבע: {user.color}</p>
               <p>עונה: {user.season}</p>
               <p>מין הלובש:{user.gender_wear}</p>
+               <img className="imgProduct" src={user.image} alt={"img"}></img>
               <div className="owners">
               <p>בעלים:{user.user.name}</p>
               <p>טלפון:{user.user.phoneNumber}</p>

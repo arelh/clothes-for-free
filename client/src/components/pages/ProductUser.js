@@ -16,15 +16,24 @@ function ProductUser() {
 
 
 //!edit
-  const editProduct=()=>{
+  const editProduct= async(id)=>{
+    try{
+      const {data}=await axios.puth(`http://localhost:5002/clothesForFree/products/update/${id}`)
+
+    }
+    catch{
+
+    }
     console.log();
   }
 //!delete
+// console.log(id);
 const deleteProduct = async (id) => {
   try {
     const { data } = await axios.delete(
       `http://localhost:5002/clothesForFree/products/delete/${id}`
     );
+    console.log(data);
     setInfoProductById((prevState) =>
       prevState.filter((product) => {
         return product.id !== data.id;
@@ -67,11 +76,12 @@ const deleteProduct = async (id) => {
         {" "}
         הוסף פריט{" "}
       </button>
-          {user&&<p className="title" >הבגדים של {user.name}</p>}
+          {user&&<p className="title"  >הבגדים של {user.name}</p>}
         </div>
+        {popup ? <EnterNewProduct id={id} setPopup={setPopup} />  : ""}
         {isLoading && <Spinner />}
         {infoProductById.map((user) => {
-          console.log(id);
+          // console.log(id);
           return (
             <div className="cardProduct_user" key={user._id}>
               <p>סוג הבגד: {user.kind}</p>
@@ -79,14 +89,13 @@ const deleteProduct = async (id) => {
               <p>צבע: {user.color}</p>
               <p>עונה: {user.season}</p>
               <p>מין הלובש:{user.gender_wear}</p>
-              <button type="button" className="btn_edit" onClick={editProduct}>edit</button>
-              <button type="button" className="btn_edit" onClick={deleteProduct}>remove</button>
+              <button type="button" className="btn_edit" onClick={editProduct}>ערוך פריט</button>
+              <button type="button" className="btn_edit" onClick={deleteProduct}>מחק פריט</button>
               
             </div>
           );
         })}
       </div>
-      {popup ? <EnterNewProduct id={id} />  : ""}
     </div>
   );
 }

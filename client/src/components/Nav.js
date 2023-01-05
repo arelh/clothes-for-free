@@ -9,6 +9,10 @@ import { Link, useNavigate } from "react-router-dom";
 function Nav({loggedUser,setLoggedUser}) {
   const navigate=useNavigate()
   
+  let user= JSON.parse(window.localStorage.getItem('user'));
+  console.log(user._id);
+  let id=user._id
+
   const logoutUser= ()=>{
     const {data}=axios.post("http://localhost:5002/clothesForFree/logout")
     console.log(data);
@@ -25,7 +29,7 @@ function Nav({loggedUser,setLoggedUser}) {
       {loggedUser&&<button onClick={logoutUser}>התנתק</button>}
       {!loggedUser&&<Link to="/Register" className="link">הירשם</Link>}
       {!loggedUser&&<Link to="/Login" className="link">התחבר</Link>}
-      {loggedUser&&<Link to={`/ProductUser/${loggedUser}`} className="link">המוצרים שלי</Link>}
+      {loggedUser&&<Link to={`/ProductUser/${id}`} className="link">המוצרים שלי</Link>}
       </div>
       <div className="logo_nav">
        {/* <img className="logo" src={logo} alt="logo"></img> */}
