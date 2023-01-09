@@ -37,6 +37,7 @@ function Nav({loggedUser,setLoggedUser}) {
       <div className="left_nav">
       <Link to="/" className="link">עמוד הבית</Link>
       <Link to="/AllProduct" className="link">כל המוצרים</Link>
+      {/* <Link to="/About" className="link">אודות</Link> */}
       </div>
     </div>
   );

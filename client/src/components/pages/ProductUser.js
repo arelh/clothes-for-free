@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {  useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import Spinner from "../Spinner";
 import EnterNewProduct from "../EnterNewProduct";
+
 // import AllProduct from "./AllProduct";
 
 function ProductUser() {
@@ -11,42 +12,39 @@ function ProductUser() {
   const [infoProductById, setInfoProductById] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [popup, setPopup] = useState(false);
-  const [user,setUser]=useState(null)
+  const [user, setUser] = useState(null);
+  const [data1, setData1] = useState(null);
 
-
-
-//!edit
-  const editProduct= async(id)=>{
-    try{
-      const {data}=await axios.puth(`http://localhost:5002/clothesForFree/products/update/${id}`)
-
+  //!edit
+  // const editProduct = async (id) => {
+  //   try {
+  //     const  {data}  = await axios.patch(
+  //       `http://localhost:5002/clothesForFree/products/update/${id}`
+  //     );
+  //     console.log(data);
+  //     setData1(data);
+  //   } catch (e) {
+  //     console.log(e.message);
+  //   }
+  // };
+  //!delete
+  // console.log(id);
+  const deleteProduct = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:5002/clothesForFree/products/delete/${id}`
+      );
+      console.log(data);
+      setInfoProductById((prevState) =>
+        prevState.filter((product) => {
+          window.location.reload(true);
+          return product.id !== data.id;
+        })
+      );
+    } catch (e) {
+      console.log(e.message);
     }
-    catch{
-
-    }
-    console.log();
-  }
-//!delete
-// console.log(id);
-const deleteProduct = async (id) => {
-  try {
-    const { data } = await axios.delete(
-      `http://localhost:5002/clothesForFree/products/delete/${id}`
-    );
-    console.log(data);
-    setInfoProductById((prevState) =>
-      prevState.filter((product) => {
-        return product.id !== data.id;
-      })
-    );
-  } catch (e) {
-    console.log(e.message);
-    
-  }
-};
-
-
-
+  };
 
   useEffect(() => {
     const fetchDataProduct = async () => {
@@ -56,6 +54,7 @@ const deleteProduct = async (id) => {
           `http://localhost:5002/clothesForFree/products/user/${id}`
         );
         setInfoProductById(data);
+
         setIsLoading(false);
       } catch (e) {
         console.log(e);
@@ -63,22 +62,27 @@ const deleteProduct = async (id) => {
       }
     };
     fetchDataProduct();
-    setUser(JSON.parse(localStorage.getItem("user")))
+    setUser(JSON.parse(localStorage.getItem("user")));
   }, [id]);
-  
+
   return (
     <div className="ProductUser">
-
+        <div className="titleAndButton">
+          <button
+            className="btn_addProduct"
+            onClick={() => {
+              setPopup(true);
+            }}
+            >
+            {" "}
+            הוסף פריט{" "}
+          </button>
+            {user && <p className="title">הבגדים של {user.name}</p>}
+          </div>
       <div className="containerProductUser">
         <div className="titleProductUser">
-      <button className="btn_addProduct" onClick={ ()=> {
-        setPopup(true)}}>
-        {" "}
-        הוסף פריט{" "}
-      </button>
-          {user&&<p className="title"  >הבגדים של {user.name}</p>}
         </div>
-        {popup ? <EnterNewProduct id={id} setPopup={setPopup} />  : ""}
+        {popup ? <EnterNewProduct id={id} setPopup={setPopup} /> : ""}
         {isLoading && <Spinner />}
         {infoProductById.map((user) => {
           // console.log(id);
@@ -89,9 +93,22 @@ const deleteProduct = async (id) => {
               <p>צבע: {user.color}</p>
               <p>עונה: {user.season}</p>
               <p>מין הלובש:{user.gender_wear}</p>
-              <button type="button" className="btn_edit" onClick={editProduct}>ערוך פריט</button>
-              <button type="button" className="btn_edit" onClick={deleteProduct}>מחק פריט</button>
-              
+              <img className="imgProduct" src={user.image} alt={"img"}></img>
+              <Link to={`/ProductUser/edit/${user._id}`}>
+                        <button type="button" className="btn_edited" >
+                          ערוך
+                        </button>
+                      </Link>
+
+              <button
+                type="button"
+                className="btn_deleted"
+                onClick={() => {
+                  deleteProduct(user._id);
+                }}
+              >
+                מחק פריט
+              </button>
             </div>
           );
         })}

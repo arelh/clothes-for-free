@@ -44,6 +44,8 @@ function Login() {
     localStorage.setItem("userLog", data.token);
     setLoggedIn(true)
     navigate(`/ProductUser/${data.id}`);
+    window.location.reload(false);
+
   };
   const pass = async () => {
     navigate("/Register");
@@ -108,6 +110,7 @@ function Login() {
                     onClick={pass}
                     className="btn btn-primary  btn-block m-1"
                     type="submit"
+                    
                   >
                     הירשם
                   </button>

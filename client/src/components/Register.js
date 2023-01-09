@@ -19,6 +19,7 @@ function Register() {
    const pass = async () => {
     navigate("/Login");
   };
+   
   //  console.log("user",user);
 
   return (
