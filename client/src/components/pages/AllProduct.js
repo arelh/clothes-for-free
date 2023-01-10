@@ -130,7 +130,7 @@ function AllProduct() {
             <div className="kindAndIcon">
             <button
               onClick={() => {
-                getItem("כובע");
+                getItem("מעיל");
               }}
             >
               מעיל
@@ -143,21 +143,21 @@ function AllProduct() {
         <div className="allCards">
         {isLoading && <Spinner />}
         {infoProduct &&
-          filterState.map((user) => {
+          filterState.map((product) => {
             return (
-              <div className="cardProduct" key={user._id}>
-                <p className="kind">סוג הבגד: {user.kind}</p>
-                <p>מידה: {user.size}</p>
-                <p>צבע: {user.color}</p>
-                <p>עונה: {user.season}</p>
-                <p>מין הלובש:{user.gender_wear}</p>
-                {/* <p>id: {user._id}</p> */}
+              <div className="cardProduct" key={product._id}>
+                <p className="kind">סוג הבגד: {product.kind}</p>
+                <p>מידה: {product.size}</p>
+                <p>צבע: {product.color}</p>
+                <p>עונה: {product.season}</p>
+                <p>מין הלובש:{product.gender_wear}</p>
+                {/* <p>id: {product._id}</p> */}
 
-                <img className="imgProduct" src={user.image} alt={"img"}></img>
+                <img className="imgProduct" src={product.image} alt={"img"}></img>
                 <div className="owners">
-                  <p>בעלים:{user.user.name}</p>
-                  <p>טלפון:{user.user.phoneNumber}</p>
-                  <p>כתובת:{user.user.address}</p>
+                  <p>בעלים:{product.user.name}</p>
+                  <p>טלפון:{product.user.phoneNumber}</p>
+                  <p>כתובת:{product.user.address}</p>
                 </div>
               </div>
             );

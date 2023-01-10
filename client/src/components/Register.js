@@ -5,16 +5,19 @@ import axios from "axios"
 function Register() {
   const navigate=useNavigate()
   const [register, setRegister] = useState({name: "",address: "",phoneNumber:"",email:"",password:""});
-  // const [user,setUser]=useState(null)
+  const [user,setUser]=useState(null)
 
 
   const RegisterUser = async ()=>{
     const {data}= await axios.post("http://localhost:5002/clothesForFree/signup",register)
      console.log(data.result);
-    //  setUser(data.result)
-     navigate(`/ProductUser/${data.result._id}`)
+     setUser(data.result)
+    //  navigate(`/ProductUser/${data.result._id}`)
+    
+     navigate('/AllProduct')
      localStorage.setItem("user", JSON.stringify(data.result))
 
+     console.log(user);
    }
    const pass = async () => {
     navigate("/Login");

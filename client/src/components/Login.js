@@ -42,6 +42,7 @@ function Login() {
     );
     console.log(data);
     localStorage.setItem("userLog", data.token);
+   
     setLoggedIn(true)
     navigate(`/ProductUser/${data.id}`);
     window.location.reload(false);
@@ -53,6 +54,7 @@ function Login() {
   useEffect(()=>{
     if(loggedIn){
       localStorage.getItem("userLog")
+      // localStorage.getItem("user")
     }
   },[loggedIn])
   return (

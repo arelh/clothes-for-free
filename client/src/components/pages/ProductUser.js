@@ -13,22 +13,9 @@ function ProductUser() {
   const [isLoading, setIsLoading] = useState(true);
   const [popup, setPopup] = useState(false);
   const [user, setUser] = useState(null);
-  const [data1, setData1] = useState(null);
+  // const [data1, setData1] = useState(null);
 
-  //!edit
-  // const editProduct = async (id) => {
-  //   try {
-  //     const  {data}  = await axios.patch(
-  //       `http://localhost:5002/clothesForFree/products/update/${id}`
-  //     );
-  //     console.log(data);
-  //     setData1(data);
-  //   } catch (e) {
-  //     console.log(e.message);
-  //   }
-  // };
-  //!delete
-  // console.log(id);
+ 
   const deleteProduct = async (id) => {
     try {
       const { data } = await axios.delete(

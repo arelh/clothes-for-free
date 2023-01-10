@@ -9,7 +9,7 @@ function Homepage() {
       <div className="overlay">
         <video src={video} autoPlay loop muted />
         <div className="content">
-          <span class="material-symbols-outlined">laundry</span>
+          <span className="material-symbols-outlined">laundry</span>
           <h1>welcome to <span className="name">clothes for free</span></h1>
         </div>
       </div>
